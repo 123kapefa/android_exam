@@ -1,0 +1,35 @@
+# Android
+*.iml
+.gradle
+/local.properties
+/.idea
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+*.apk
+*.ap_
+*.db
+*.db-journal
+*.jks
+*.keystore
+
+# Kotlin/Java
+*.class
+*.jar
+*.war
+*.ear
+
+# Log/Temp files
+*.log
+*.tmp
+
+# OS
+Thumbs.db
+ehthumbs.db
+*.DS_Store
+
+# Ignore generated files
+**/build/
+**/.gradle/
