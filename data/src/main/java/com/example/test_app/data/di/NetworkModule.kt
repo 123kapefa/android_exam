@@ -1,6 +1,8 @@
 package com.example.test_app.data.di
 
+import com.example.test_app.data.remote.PlayerRemoteDataSource
 import com.example.test_app.data.remote.api.SteamApi
+import com.example.test_app.data.remote.impl.PlayerRemoteDataSourceImpl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -26,4 +28,11 @@ val networkModule = module {
     }
 
     single { get<Retrofit>().create(SteamApi::class.java) }
+
+    single<PlayerRemoteDataSource> {
+        PlayerRemoteDataSourceImpl(
+            api = get(),
+            apiKey = "EA1DE8EE2AA49173445A110E554963FF"
+        )
+    }
 }
