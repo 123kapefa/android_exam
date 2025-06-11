@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.test_app.presentation.fragment.LoginFragment"
-        android:label="Login">
+        android:label="@string/title_login">
         <action
             android:id="@+id/action_loginFragment_to_achievementListFragment"
             app:destination="@id/achievementListFragment" />
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/achievementListFragment"
         android:name="com.example.test_app.presentation.fragment.AchievementListFragment"
-        android:label="Achievements" >
+        android:label="@string/title_achievement" >
         <action
             android:id="@+id/action_loginFragment_to_achievementListFragment"
             app:destination="@id/achievementListFragment" />
