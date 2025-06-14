@@ -7,17 +7,17 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#900</color>
 
-    <color name="primary">#6200EE</color>
+    <color name="primary">#BB86FC</color>
     <color name="primaryVariant">#3700B3</color>
-    <color name="onPrimary">#FFFFFF</color>
-    <color name="background">#FFFFFF</color>
-    <color name="onBackground">#000113</color>
+    <color name="onPrimary">#000000</color>
+    <color name="background">#000113</color>
+    <color name="onBackground">#FFFFFF</color>
 
-    <color name="textFg">#1E293B</color>
-    <color name="btnBg">#000113</color>
+    <color name="textFg">#8CA2C1</color>
+    <color name="btnBg">#334155</color>
     <color name="input_background">#000113</color>
-    <color name="textLink">#3A4150</color>
-    <color name="textLinkBold">#2C333A</color>
+    <color name="textLink">#8A9FBD</color>
+    <color name="textLinkBold">#A7BEE0</color>
     <color name="darkGreen">#002309</color>
 
     <color name="purple_500">#6750A4</color>

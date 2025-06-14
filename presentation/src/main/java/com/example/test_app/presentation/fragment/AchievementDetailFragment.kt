@@ -42,15 +42,12 @@ class AchievementDetailFragment : Fragment(R.layout.fragment_achievement_detail)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val toolbar     = view.findViewById<MaterialToolbar>(R.id.toolbar)
         val icon        = view.findViewById<ImageView>(R.id.iconImageView)
         val title       = view.findViewById<TextView>(R.id.titleTextView)
         val date        = view.findViewById<TextView>(R.id.dateTextView)
         val desc        = view.findViewById<TextView>(R.id.descTextView)
         val badge       = view.findViewById<TextView>(R.id.stateBadge)
         val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
-
-        toolbar.setNavigationOnClickListener { findNavController().navigateUp() }
 
         val dateFmt = DateTimeFormatter
             .ofPattern("dd MMM yyyy • HH:mm", Locale.getDefault())

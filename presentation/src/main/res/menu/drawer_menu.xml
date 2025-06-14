@@ -13,12 +13,12 @@
     <!--    android:icon="@drawable/ic_characters"-->
     <item
         android:id="@+id/achievementListFragment"
-        android:title="@string/title_characters"
+        android:title="@string/title_achievements"
         />
     <!--    android:icon="@drawable/ic_characters"-->
     <item
         android:id="@+id/playerProfileFragment"
-        android:title="@string/title_characters"
+        android:title="@string/title_profile"
         />
     <!--    android:icon="@drawable/ic_characters"-->
 
