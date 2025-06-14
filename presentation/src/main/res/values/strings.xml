@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="item_icon">Иконка</string>
-    <string name="title_login">Login</string>
+    <string name="title_login">Вход</string>
+    <string name="title_logout">Выход</string>
+    <string name="title_avatar_icon">Аватарка</string>
+    <string name="title_input_steam_id">Enter Steam ID</string>
+    <string name="title_profile">Личный профиль</string>
+
+
     <string name="title_achievement">Achievements</string>
     <string name="title_input_login_steam">Введите Steam ID</string>
+    <string name="title_achievement_icon">Иконка достижения</string>
+    <string name="title_items">Предметы</string>
+    <string name="title_trinkets">Брелки</string>
+    <string name="title_cards_and_runes">Карты и руны</string>
+    <string name="title_pickups">Подбираемые предметы</string>
+    <string name="title_characters">Персонажи</string>
+    <string name="title_achievements">Достижения</string>
+    <string name="title_transformations">Трансформации</string>
+    <string name="title_pills">Пилюли</string>
+    <string name="title_challenges">Испытания</string>
+
+    <string name="title_achievement_detail">Достижение</string>
+    <string name="unlocked">Получено</string>
+    <string name="locked">Не получено</string>
+    <string name="unlocked_at">Открыто: %1$s</string>
+    <string name="not_unlocked_yet">Ещё не открыто</string>
+    <string name="no_description">Описание отсутствует</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
 </resources>

@@ -25,7 +25,6 @@ class PlayerRepositoryImpl(
         }
 
 
-    /** Информация о игроке всегда берётся из сети. */
     override suspend fun getPlayerInfo(steamId: String): Player =
         withContext(Dispatchers.IO) {
             val player = remote.fetchPlayerInfo(steamId).toDomain()
@@ -33,19 +32,13 @@ class PlayerRepositoryImpl(
             player
         }
 
-    /**
-     * Список достижений:
-     * 1) Пытаемся из Room-кэша.
-     * 2) Если кэш пуст — тянем из сети,
-     *    объединяем схему + прогресс, сохраняем в БД.
-     */
+
     override suspend fun getPlayerAchievements(steamId: String): List<PlayerAchievement> =
         withContext(Dispatchers.IO) {
             // 1. КЭШ
             val cached = dao.getAll().map { it.toDomain() }
             if (cached.isNotEmpty()) return@withContext cached
 
-            // 2. СЕТЬ
             val schema   = remote.fetchAchievementSchema().map { it.toDomain() }
             val progress = remote.fetchPlayerAchievements(steamId)
 
@@ -55,14 +48,24 @@ class PlayerRepositoryImpl(
                     ?: ach
             }
 
-            // 3. СОХРАНЯЕМ
             dao.insertAll(merged.map { it.toEntity() })
             merged
         }
 
-    /** Чистая схема (без прогресса) — тоже в IO-потоке. */
     override suspend fun getAchievementSchema(): List<PlayerAchievement> =
         withContext(Dispatchers.IO) {
             remote.fetchAchievementSchema().map { it.toDomain() }
         }
+
+    override suspend fun getAchievementById(id: String): PlayerAchievement =
+        withContext(Dispatchers.IO) {
+            dao.getById(id)?.toDomain() ?: run {
+                throw IllegalArgumentException("Achievement $id not found in cache")
+            }
+        }
+
+    override suspend fun logout() = withContext(Dispatchers.IO) {
+        playerDao.clear()
+        dao.clear()
+    }
 }
