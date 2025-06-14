@@ -8,4 +8,5 @@ interface PlayerRepository {
     suspend fun getPlayerInfo(steamId: String): Player
     suspend fun getPlayerAchievements(steamId: String): List<PlayerAchievement>
     suspend fun getAchievementSchema(): List<PlayerAchievement>
+    suspend fun getAchievementById(id: String): PlayerAchievement
 }

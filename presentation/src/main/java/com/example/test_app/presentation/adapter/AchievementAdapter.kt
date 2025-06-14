@@ -12,39 +12,48 @@ import com.bumptech.glide.Glide
 import com.example.test_app.domain.model.PlayerAchievement
 import com.example.test_app.presentation.R
 
-class AchievementAdapter : ListAdapter<PlayerAchievement, AchievementAdapter.AchievementViewHolder>(DiffCallback) {
+class AchievementAdapter(
+    private val onClick: (String) -> Unit
+) : ListAdapter<PlayerAchievement, AchievementAdapter.AchievementViewHolder>(
+    DiffCallback
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_achievement, parent, false)
-        return AchievementViewHolder(view)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_achievement, parent, false)
+        return AchievementViewHolder(view, onClick)
     }
 
     override fun onBindViewHolder(holder: AchievementViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 
-    class AchievementViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class AchievementViewHolder(
+        itemView: View,
+        private val onClick: (String) -> Unit
+    ) : RecyclerView.ViewHolder(itemView) {
+
         private val title: TextView = itemView.findViewById(R.id.titleTextView)
         private val description: TextView = itemView.findViewById(R.id.descriptionTextView)
         private val icon: ImageView = itemView.findViewById(R.id.iconImageView)
 
         fun bind(item: PlayerAchievement) {
             title.text = item.title
-            description.text = item.description
+            description.text = item.description ?: ""
             val imageUrl = if (item.isUnlocked) item.iconUrl else item.iconGrayUrl
             Glide.with(itemView.context).load(imageUrl).into(icon)
+
+            itemView.setOnClickListener { onClick(item.id) }
         }
     }
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<PlayerAchievement>() {
-            override fun areItemsTheSame(oldItem: PlayerAchievement, newItem: PlayerAchievement): Boolean {
-                return oldItem.id == newItem.id
-            }
+            override fun areItemsTheSame(oldItem: PlayerAchievement, newItem: PlayerAchievement) =
+                oldItem.id == newItem.id
 
-            override fun areContentsTheSame(oldItem: PlayerAchievement, newItem: PlayerAchievement): Boolean {
-                return oldItem == newItem
-            }
+            override fun areContentsTheSame(oldItem: PlayerAchievement, newItem: PlayerAchievement) =
+                oldItem == newItem
         }
     }
 }

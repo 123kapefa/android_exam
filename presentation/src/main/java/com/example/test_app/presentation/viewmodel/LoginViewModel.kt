@@ -13,12 +13,10 @@ class LoginViewModel(
 ) : ViewModel() {
 
     suspend fun login(steamId: String) = withContext(Dispatchers.IO) {
-        // 1) загружаем профиль → сохранится в БД
         getPlayerInfo(steamId)
 
         delay(1500)
 
-        // 2) загружаем/кэшируем достижения
         getAchievements(steamId)
     }
 }

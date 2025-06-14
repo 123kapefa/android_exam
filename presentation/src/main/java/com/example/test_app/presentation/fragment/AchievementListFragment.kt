@@ -3,8 +3,10 @@ package com.example.test_app.presentation.fragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test_app.presentation.R
@@ -23,7 +25,21 @@ class AchievementListFragment : Fragment(R.layout.fragment_achievement_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = AchievementAdapter()
+//        adapter = AchievementAdapter { id ->
+//            val bundle = bundleOf("achievementId" to id)
+//            findNavController().navigate(
+//                R.id.action_global_to_achievementDetail,
+//                bundle
+//            )
+//        }
+
+        adapter = AchievementAdapter { id ->
+            findNavController().navigate(
+                R.id.action_list_to_detail,
+                bundleOf("achievementId" to id)
+            )
+        }
+
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
