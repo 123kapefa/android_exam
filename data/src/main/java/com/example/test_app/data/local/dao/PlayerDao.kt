@@ -13,4 +13,7 @@ interface PlayerDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(player: PlayerEntity)
+
+    @Query("DELETE FROM player")
+    suspend fun clear()
 }

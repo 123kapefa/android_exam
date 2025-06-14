@@ -17,4 +17,7 @@ interface AchievementDao {
 
     @Query("SELECT * FROM achievement WHERE id = :aid")
     suspend fun getById(aid: String): AchievementEntity?
+
+    @Query("DELETE FROM achievement")
+    suspend fun clear()
 }
