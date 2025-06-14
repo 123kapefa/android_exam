@@ -14,4 +14,7 @@ interface AchievementDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(list: List<AchievementEntity>)
+
+    @Query("SELECT * FROM achievement WHERE id = :aid")
+    suspend fun getById(aid: String): AchievementEntity?
 }

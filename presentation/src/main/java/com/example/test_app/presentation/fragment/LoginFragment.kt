@@ -28,7 +28,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             if (steamId.isNotEmpty()) {
                 viewLifecycleOwner.lifecycleScope.launch {
                     viewModel.login(steamId)
-                    findNavController().navigate(R.id.action_loginFragment_to_achievementListFragment)
+                    findNavController().navigate(R.id.action_login_to_list)
                 }
             } else {
                 Toast.makeText(requireContext(), "Введите Steam ID", Toast.LENGTH_SHORT).show()

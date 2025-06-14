@@ -11,7 +11,7 @@
         android:id="@+id/steamIdEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Steam ID"
+        android:hint="@string/title_input_steam_id"
         android:inputType="text"
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/darker_gray" />
@@ -20,6 +20,6 @@
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login"
+        android:text="@string/title_login"
         android:layout_marginTop="16dp" />
 </LinearLayout>

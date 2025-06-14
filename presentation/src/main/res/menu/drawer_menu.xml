@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_items"
-        android:title="Предметы"
+        android:title="@string/title_items"
         />
     <!--    android:icon="@drawable/ic_items"-->
     <item
         android:id="@+id/nav_characters"
-        android:title="Персонажи"
+        android:title="@string/title_characters"
         />
     <!--    android:icon="@drawable/ic_characters"-->
 
