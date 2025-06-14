@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="item_icon">Иконка</string>
-    <string name="title_login">Login</string>
+    <string name="title_login">Вход</string>
+    <string name="title_logout">Выход</string>
+    <string name="title_avatar_icon">Аватарка</string>
     <string name="title_input_steam_id">Enter Steam ID</string>
+    <string name="title_profile">Личный профиль</string>
+
 
     <string name="title_achievement">Achievements</string>
     <string name="title_input_login_steam">Введите Steam ID</string>
