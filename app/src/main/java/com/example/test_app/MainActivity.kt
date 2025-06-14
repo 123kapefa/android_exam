@@ -2,21 +2,20 @@ package com.example.test_app
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.test_app.domain.repository.PlayerRepository
+import com.example.test_app.presentation.api.DrawerController
 import com.example.test_app.presentation.databinding.ActivityMainBinding
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), DrawerController {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfig: AppBarConfiguration
 
     private val playerRepository: PlayerRepository by inject()
@@ -27,31 +26,44 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        drawerLayout = binding.drawerLayout
+        setSupportActionBar(binding.toolbar)
 
-        val navHostFragment = supportFragmentManager
+        val navHost = supportFragmentManager
             .findFragmentById(com.example.test_app.presentation.R.id.fragment_container) as NavHostFragment
-        val navController = navHostFragment.navController
+        val navController = navHost.navController
 
         appBarConfig = AppBarConfiguration(
             setOf(
                 com.example.test_app.presentation.R.id.achievementListFragment,
+                com.example.test_app.presentation.R.id.playerProfileFragment
             ),
-            drawerLayout
+            binding.drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfig)
 
-        NavigationUI.setupWithNavController(binding.navigationView, navController)
+        NavigationUI.setupWithNavController(
+            binding.navigationView,
+            navController
+        )
 
         lifecycleScope.launch {
-            val savedId = playerRepository.getSavedSteamId()
-
-            if (savedId != null) {
+            playerRepository.getSavedSteamId()?.let {
                 val graph = navController.navInflater.inflate(com.example.test_app.presentation.R.navigation.nav_graph)
                 graph.setStartDestination(com.example.test_app.presentation.R.id.achievementListFragment)
                 navController.graph = graph
             }
         }
     }
+
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController =
+            (supportFragmentManager.findFragmentById(com.example.test_app.presentation.R.id.fragment_container) as NavHostFragment)
+                .navController
+        return NavigationUI.navigateUp(navController, appBarConfig) || super.onSupportNavigateUp()
+    }
+
+    override fun closeDrawer() = binding.drawerLayout.close()
+    override fun openDrawer()  = binding.drawerLayout.open()
 }

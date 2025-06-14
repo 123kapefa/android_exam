@@ -35,4 +35,9 @@
             app:argType="string" />
     </fragment>
 
+    <fragment
+        android:id="@+id/playerProfileFragment"
+        android:name="com.example.test_app.presentation.fragment.PlayerProfileFragment"
+        android:label="@string/title_profile" />
+
 </navigation>
