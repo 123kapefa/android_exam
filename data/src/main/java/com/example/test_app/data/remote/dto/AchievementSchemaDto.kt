@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class AchievementSchemaDto(
     @SerializedName("name") val id: String,
     @SerializedName("displayName") val title: String,
-    val description: String,
+    val description: String?,
     val hidden: Int,
     val icon: String,
     @SerializedName("icongray") val iconGrayUrl: String
