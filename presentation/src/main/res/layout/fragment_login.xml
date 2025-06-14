@@ -5,21 +5,31 @@
     android:orientation="vertical"
     android:padding="24dp"
     android:gravity="center"
-    android:background="@android:color/background_dark">
+    android:background="@color/background">
 
-    <EditText
-        android:id="@+id/steamIdEditText"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.TextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/title_input_steam_id"
-        android:inputType="text"
-        android:textColor="@android:color/white"
-        android:textColorHint="@android:color/darker_gray" />
+        android:hint="@string/title_input_steam_id">
 
-    <Button
-        android:id="@+id/loginButton"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/steamIdEditText"
+            style="@style/Widget.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Button"
+        android:id="@+id/btnLogin"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_56"
+        android:layout_marginTop="@dimen/margin_32"
         android:text="@string/title_login"
-        android:layout_marginTop="16dp" />
+        android:textSize="@dimen/text_size_18"
+        android:textAllCaps="false"/>
 </LinearLayout>
+
+<!--    76561199096529705-->

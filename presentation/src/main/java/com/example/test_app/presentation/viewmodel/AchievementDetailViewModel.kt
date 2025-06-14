@@ -32,18 +32,3 @@ class AchievementDetailViewModel(
         }
     }
 }
-
-//class AchievementDetailViewModel(
-//    private val achievementId: String,
-//    private val getAchievement: GetAchievementByIdUseCase
-//) : ViewModel() {
-//
-//    private val _uiState = MutableStateFlow<PlayerAchievement?>(null)
-//    val uiState: StateFlow<PlayerAchievement> get() = _uiState as StateFlow<PlayerAchievement>
-//
-//    init {
-//        viewModelScope.launch {
-//            _uiState.value = getAchievement(achievementId)
-//        }
-//    }
-//}

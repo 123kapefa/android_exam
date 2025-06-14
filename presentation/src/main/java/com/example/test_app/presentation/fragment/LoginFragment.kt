@@ -21,7 +21,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         super.onViewCreated(view, savedInstanceState)
 
         val editText = view.findViewById<EditText>(R.id.steamIdEditText)
-        val button = view.findViewById<Button>(R.id.loginButton)
+        val button = view.findViewById<Button>(R.id.btnLogin)
 
         button.setOnClickListener {
             val steamId = editText.text.toString().trim()

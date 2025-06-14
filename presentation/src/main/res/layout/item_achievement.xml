@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="@android:color/background_dark">
+    android:padding="@dimen/padding_8"
+    android:layout_margin="@dimen/margin_4"
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/iconImageView"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="12dp"
+        android:layout_width="@dimen/width_48"
+        android:layout_height="@dimen/width_48"
+        android:layout_marginEnd="@dimen/margin_16"
         android:contentDescription="@string/title_achievement_icon"
         android:scaleType="fitCenter" />
 
@@ -25,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/text_size_16"
             android:textStyle="bold"
             android:maxLines="1"
             android:ellipsize="end" />
@@ -35,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/darker_gray"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_size_14"
             android:maxLines="2"
             android:ellipsize="end" />
 
