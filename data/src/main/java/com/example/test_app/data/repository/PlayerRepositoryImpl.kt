@@ -57,21 +57,15 @@ class PlayerRepositoryImpl(
             remote.fetchAchievementSchema().map { it.toDomain() }
         }
 
-//    override suspend fun getAchievementById(id: String): PlayerAchievement =
-//        withContext(Dispatchers.IO) {
-//            dao.getById(id)?.toDomain()
-//                ?: run {
-//                    val schema = remote.fetchAchievementSchema().map { it.toDomain() }
-//                    dao.insertAll(schema.map { it.toEntity() })
-//                    dao.getById(id)?.toDomain()
-//                        ?: error("Achievement $id not found even after schema refresh")
-//                }
-//        }
-
     override suspend fun getAchievementById(id: String): PlayerAchievement =
         withContext(Dispatchers.IO) {
             dao.getById(id)?.toDomain() ?: run {
                 throw IllegalArgumentException("Achievement $id not found in cache")
             }
         }
+
+    override suspend fun logout() = withContext(Dispatchers.IO) {
+        playerDao.clear()
+        dao.clear()
+    }
 }
