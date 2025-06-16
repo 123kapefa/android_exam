@@ -1,59 +1,43 @@
-package com.example.test_app.presentation.adapter
-
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.test_app.domain.model.PlayerAchievement
-import com.example.test_app.presentation.R
+import com.example.test_app.presentation.databinding.ItemAchievementBinding
 
 class AchievementAdapter(
     private val onClick: (String) -> Unit
-) : ListAdapter<PlayerAchievement, AchievementAdapter.AchievementViewHolder>(
-    DiffCallback
-) {
+) : ListAdapter<PlayerAchievement, AchievementAdapter.VH>(Diff) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AchievementViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_achievement, parent, false)
-        return AchievementViewHolder(view, onClick)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        val binding = ItemAchievementBinding.inflate(
+            LayoutInflater.from(parent.context), parent, false
+        )
+        return VH(binding, onClick)
     }
 
-    override fun onBindViewHolder(holder: AchievementViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VH, position: Int) =
         holder.bind(getItem(position))
-    }
 
-    class AchievementViewHolder(
-        itemView: View,
+    class VH(
+        private val binding: ItemAchievementBinding,
         private val onClick: (String) -> Unit
-    ) : RecyclerView.ViewHolder(itemView) {
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val title: TextView = itemView.findViewById(R.id.titleTextView)
-        private val description: TextView = itemView.findViewById(R.id.descriptionTextView)
-        private val icon: ImageView = itemView.findViewById(R.id.iconImageView)
+        fun bind(item: PlayerAchievement) = with(binding) {
+            titleTextView.text       = item.title
+            descriptionTextView.text = item.description ?: ""
+            val url                  = if (item.isUnlocked) item.iconUrl else item.iconGrayUrl
+            Glide.with(root).load(url).into(iconImageView)
 
-        fun bind(item: PlayerAchievement) {
-            title.text = item.title
-            description.text = item.description ?: ""
-            val imageUrl = if (item.isUnlocked) item.iconUrl else item.iconGrayUrl
-            Glide.with(itemView.context).load(imageUrl).into(icon)
-
-            itemView.setOnClickListener { onClick(item.id) }
+            root.setOnClickListener { onClick(item.id) }
         }
     }
 
-    companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<PlayerAchievement>() {
-            override fun areItemsTheSame(oldItem: PlayerAchievement, newItem: PlayerAchievement) =
-                oldItem.id == newItem.id
-
-            override fun areContentsTheSame(oldItem: PlayerAchievement, newItem: PlayerAchievement) =
-                oldItem == newItem
-        }
+    private object Diff : DiffUtil.ItemCallback<PlayerAchievement>() {
+        override fun areItemsTheSame(o: PlayerAchievement, n: PlayerAchievement) = o.id == n.id
+        override fun areContentsTheSame(o: PlayerAchievement, n: PlayerAchievement) = o == n
     }
 }

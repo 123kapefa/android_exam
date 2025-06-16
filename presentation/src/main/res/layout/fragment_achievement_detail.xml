@@ -10,8 +10,8 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="@dimen/width_48"
+        android:layout_height="@dimen/height_48"
         android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -21,8 +21,8 @@
 
     <ImageView
         android:id="@+id/iconImageView"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="@dimen/width_128"
+        android:layout_height="@dimen/height_128"
         android:layout_gravity="center"
         android:contentDescription="@string/title_achievement_icon" />
 
@@ -30,28 +30,28 @@
         android:id="@+id/titleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="@dimen/text_size_20"
         android:textStyle="bold"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="@dimen/margin_16" />
 
     <TextView
         android:id="@+id/dateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"
+        android:textSize="@dimen/text_size_14"
         android:textColor="@android:color/darker_gray"
-        android:layout_marginTop="4dp" />
+        android:layout_marginTop="@dimen/margin_4" />
 
     <TextView
         android:id="@+id/descTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp" />
+        android:layout_marginTop="@dimen/margin_16" />
 
     <TextView
         android:id="@+id/stateBadge"
         style="@style/Badge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="@dimen/margin_16" />
 </LinearLayout>

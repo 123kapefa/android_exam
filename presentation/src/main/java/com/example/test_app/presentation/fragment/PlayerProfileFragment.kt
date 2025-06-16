@@ -1,9 +1,9 @@
 package com.example.test_app.presentation.fragment
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -12,42 +12,56 @@ import com.bumptech.glide.Glide
 import com.example.test_app.domain.repository.PlayerRepository
 import com.example.test_app.presentation.R
 import com.example.test_app.presentation.api.DrawerController
-import com.google.android.material.button.MaterialButton
+import com.example.test_app.presentation.databinding.FragmentPlayerProfileBinding
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.koin.android.ext.android.inject
 
-class PlayerProfileFragment : Fragment(R.layout.fragment_player_profile) {
+class PlayerProfileFragment : Fragment() {
 
-    private val repo: PlayerRepository by inject() // Koin
+    private val playerRepository: PlayerRepository by inject()
 
-    private lateinit var avatar: ImageView
-    private lateinit var name  : TextView
-    private lateinit var logoutBtn: MaterialButton
+    private var _binding: FragmentPlayerProfileBinding? = null
+    private val binding get() = _binding!!
 
     private val drawerController: DrawerController?
         get() = activity as? DrawerController
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) = with(view) {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentPlayerProfileBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        avatar    = findViewById(R.id.avatarImageView)
-        name      = findViewById(R.id.nameTextView)
-        logoutBtn = findViewById(R.id.logoutButton)
-
         viewLifecycleOwner.lifecycleScope.launch {
-            repo.getSavedSteamId()?.let { id ->
-                val player = repo.getPlayerInfo(id)
-                name.text = player.personaname
-                Glide.with(this@PlayerProfileFragment)
-                    .load(player.avatarfull)
-                    .circleCrop()
-                    .into(avatar)
+            val id = playerRepository.getSavedSteamId()
+            if (id == null) {
+                binding.nameTextView.text = getString(R.string.unknown_player)
+                return@launch
             }
+
+            val player = withContext(Dispatchers.IO) {
+                playerRepository.getPlayerInfo(id)
+            }
+
+            binding.nameTextView.text = player.personaname
+            Glide.with(binding.avatarImageView)
+                .load(player.avatarfull)
+                .circleCrop()
+                .into(binding.avatarImageView)
         }
 
-        logoutBtn.setOnClickListener {
+        binding.logoutButton.setOnClickListener {
             viewLifecycleOwner.lifecycleScope.launch {
-                repo.logout()
+                withContext(Dispatchers.IO) { playerRepository.logout() }
+
                 findNavController().navigate(
                     R.id.loginFragment,
                     null,
@@ -59,5 +73,10 @@ class PlayerProfileFragment : Fragment(R.layout.fragment_player_profile) {
                 drawerController?.closeDrawer()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }

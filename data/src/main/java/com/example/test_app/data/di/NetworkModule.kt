@@ -1,5 +1,6 @@
 package com.example.test_app.data.di
 
+import com.example.test_app.data.BuildConfig
 import com.example.test_app.data.remote.PlayerRemoteDataSource
 import com.example.test_app.data.remote.api.SteamApi
 import com.example.test_app.data.remote.impl.PlayerRemoteDataSourceImpl
@@ -32,7 +33,7 @@ val networkModule = module {
     single<PlayerRemoteDataSource> {
         PlayerRemoteDataSourceImpl(
             api = get(),
-            apiKey = "EA1DE8EE2AA49173445A110E554963FF"
+            apiKey = BuildConfig.STEAM_API_KEY
         )
     }
 }

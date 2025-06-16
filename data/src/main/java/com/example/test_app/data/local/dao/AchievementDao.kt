@@ -1,6 +1,7 @@
 package com.example.test_app.data.local.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -20,4 +21,7 @@ interface AchievementDao {
 
     @Query("DELETE FROM achievement")
     suspend fun clear()
+
+    @Delete
+    suspend fun delete(vararg entities: AchievementEntity)
 }
