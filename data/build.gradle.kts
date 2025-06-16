@@ -9,11 +9,17 @@ android {
     namespace = "com.example.test_app.data"
     compileSdk = 35
 
+    buildFeatures { buildConfig = true }
+
     defaultConfig {
         minSdk = 30
 
+        buildConfigField("int", "STEAM_APP_ID", "250900")
+
+        val steamApiKey: String = (project.findProperty("steamApiKey") ?: "").toString()
+        buildConfigField("String", "STEAM_API_KEY", "\"$steamApiKey\"")
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {

@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:padding="24dp"
+    android:padding="@dimen/padding_24"
     android:background="?attr/colorSurface">
 
     <ImageView
         android:id="@+id/avatarImageView"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
+        android:layout_width="@dimen/width_128"
+        android:layout_height="@dimen/height_128"
         android:scaleType="centerCrop"
         android:contentDescription="@string/title_avatar_icon" />
 
@@ -20,8 +20,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:textSize="20sp"
-        android:layout_marginTop="16dp" />
+        android:textSize="@dimen/text_size_20"
+        android:layout_marginTop="@dimen/margin_16" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logoutButton"
@@ -29,5 +29,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/title_logout"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="@dimen/margin_32" />
 </LinearLayout>

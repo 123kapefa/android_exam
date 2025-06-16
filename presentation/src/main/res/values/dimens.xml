@@ -8,6 +8,7 @@
     <dimen name="height_36">36dp</dimen>
     <dimen name="height_48">48dp</dimen>
     <dimen name="height_56">56dp</dimen>
+    <dimen name="height_128">128dp</dimen>
     <dimen name="height_136">136dp</dimen>
     <dimen name="height_148">148dp</dimen>
     <dimen name="height_172">172dp</dimen>
@@ -19,7 +20,10 @@
     <dimen name="width_36">36dp</dimen>
     <dimen name="width_48">48dp</dimen>
     <dimen name="width_56">56dp</dimen>
+    <dimen name="width_128">128dp</dimen>
+    <dimen name="width_136">136dp</dimen>
     <dimen name="width_148">148dp</dimen>
+    <dimen name="width_172">172dp</dimen>
 
     <dimen name="padding_4">4dp</dimen>
     <dimen name="padding_8">8dp</dimen>

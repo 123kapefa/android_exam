@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.test_app.domain.model.PlayerAchievement
 import com.example.test_app.domain.usecase.GetAchievementByIdUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,7 +26,7 @@ class AchievementDetailViewModel(
     val uiState: StateFlow<AchievementDetailUiState> = _uiState
 
     init {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching { getById(id) }
                 .onSuccess { _uiState.value = AchievementDetailUiState.Success(it) }
                 .onFailure { _uiState.value = AchievementDetailUiState.Error(it.message ?: "") }

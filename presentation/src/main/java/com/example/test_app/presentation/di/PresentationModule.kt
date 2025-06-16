@@ -7,7 +7,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val presentationModule = module {
-    viewModel { AchievementListViewModel(get()) }
+    viewModel { AchievementListViewModel(get(), get()) }
     viewModel { (id: String) -> AchievementDetailViewModel(id, get()) }
     viewModel { LoginViewModel(get(), get()) }
 }

@@ -2,10 +2,9 @@ package com.example.test_app.presentation.fragment
 
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
@@ -15,9 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.test_app.presentation.R
+import com.example.test_app.presentation.databinding.FragmentAchievementDetailBinding
 import com.example.test_app.presentation.viewmodel.AchievementDetailUiState
 import com.example.test_app.presentation.viewmodel.AchievementDetailViewModel
-import com.google.android.material.appbar.MaterialToolbar
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,13 +24,15 @@ import org.koin.core.parameter.parametersOf
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 
-class AchievementDetailFragment : Fragment(R.layout.fragment_achievement_detail) {
+class AchievementDetailFragment : Fragment() {
+
+    private var _binding: FragmentAchievementDetailBinding? = null
+    private val binding get() = _binding!!
 
     private val achievementId: String by lazy {
-        requireArguments()
-            .getString("achievementId")
+        requireArguments().getString("achievementId")
             ?: error("achievementId argument is missing")
     }
 
@@ -39,69 +40,70 @@ class AchievementDetailFragment : Fragment(R.layout.fragment_achievement_detail)
         parametersOf(achievementId)
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentAchievementDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val icon        = view.findViewById<ImageView>(R.id.iconImageView)
-        val title       = view.findViewById<TextView>(R.id.titleTextView)
-        val date        = view.findViewById<TextView>(R.id.dateTextView)
-        val desc        = view.findViewById<TextView>(R.id.descTextView)
-        val badge       = view.findViewById<TextView>(R.id.stateBadge)
-        val progressBar = view.findViewById<ProgressBar>(R.id.progressBar)
-
-        val dateFmt = DateTimeFormatter
-            .ofPattern("dd MMM yyyy • HH:mm", Locale.getDefault())
+        val dateFmt = DateTimeFormatter.ofPattern(
+            "dd MMM yyyy • HH:mm",
+            Locale.getDefault()
+        )
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.uiState.collectLatest { state ->
                 when (state) {
                     is AchievementDetailUiState.Loading -> {
-                        progressBar.isVisible = true
+                        binding.progressBar.isVisible = true
                     }
 
                     is AchievementDetailUiState.Success -> {
-                        progressBar.isGone = true
+                        binding.progressBar.isGone = true
                         val a = state.data
 
-                        title.text = a.title
-                        desc.text  = a.description ?: getString(R.string.no_description)
+                        binding.titleTextView.text = a.title
+                        binding.descTextView.text =
+                            a.description ?: getString(R.string.no_description)
 
-                        if (a.isUnlocked) {
-                            date.text = getString(
+                        binding.dateTextView.text =
+                            if (a.isUnlocked) getString(
                                 R.string.unlocked_at,
                                 dateFmt.format(
                                     Instant.ofEpochSecond(a.unlockTime!!)
                                         .atZone(ZoneId.systemDefault())
                                 )
-                            )
-                        } else {
-                            date.text = getString(R.string.not_unlocked_yet)
-                        }
+                            ) else getString(R.string.not_unlocked_yet)
 
-                        val color = ContextCompat.getColor(
+                        val badgeColor = ContextCompat.getColor(
                             requireContext(),
                             if (a.isUnlocked) R.color.green_500 else R.color.red_400
                         )
 
-                        val bg = (badge.background as? GradientDrawable)
+                        val bg = (binding.stateBadge.background as? GradientDrawable)
                             ?: ContextCompat.getDrawable(
                                 requireContext(),
                                 R.drawable.rounded_rect
-                            )!!.also { badge.background = it } as GradientDrawable
+                            )!!.also { binding.stateBadge.background = it } as GradientDrawable
 
-                        bg.setColor(color)
-                        badge.text = if (a.isUnlocked)
-                            getString(R.string.unlocked)
-                        else
-                            getString(R.string.locked)
+                        bg.setColor(badgeColor)
+                        binding.stateBadge.text =
+                            if (a.isUnlocked) getString(R.string.unlocked)
+                            else getString(R.string.locked)
 
-                        Glide.with(icon)
+                        Glide.with(binding.iconImageView)
                             .load(if (a.isUnlocked) a.iconUrl else a.iconGrayUrl)
-                            .into(icon)
+                            .into(binding.iconImageView)
                     }
 
                     is AchievementDetailUiState.Error -> {
-                        progressBar.isGone = true
+                        binding.progressBar.isGone = true
                         Toast.makeText(
                             requireContext(),
                             state.msg.ifBlank { getString(R.string.something_went_wrong) },
@@ -112,5 +114,10 @@ class AchievementDetailFragment : Fragment(R.layout.fragment_achievement_detail)
                 }
             }
         }
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 }
