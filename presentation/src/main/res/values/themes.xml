@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorPrimaryVariant">@color/primaryVariant</item>
+        <item name="colorOnPrimary">@color/onPrimary</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:textColor">@color/onBackground</item>
+
+        <item name="materialButtonStyle">@style/Widget.Button</item>
+        <item name="android:textViewStyle">@style/Widget.TextView</item>
+        <item name="textInputStyle">@style/Widget.TextInputLayout</item>
+    </style>
+
+    <!--    Button Style-->
+    <style name="Widget.Button" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">4dp</item>
+        <item name="android:textColor">@color/onPrimary</item>
+        <item name="backgroundTint">@color/btnBg</item>
+    </style>
+
+    <style name="Widget.ButtonLink" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">4dp</item>
+        <item name="strokeColor">@color/textLink</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:stateListAnimator">@null</item>
+
+        <item name="backgroundTint">@android:color/transparent</item>
+        <item name="android:textColor">@color/textLink</item>
+    </style>
+
+    <!--    TextView Style-->
+    <style name="Widget.TextView" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/textFg</item>
+    </style>
+
+    <!--    EditTextView Style-->
+    <style name="Widget.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopStart">8dp</item>
+        <item name="boxCornerRadiusTopEnd">8dp</item>
+        <item name="boxCornerRadiusBottomStart">8dp</item>
+        <item name="boxCornerRadiusBottomEnd">8dp</item>
+
+        <item name="boxBackgroundColor">@color/background</item>
+
+        <item name="boxStrokeColor">@color/onBackground</item>
+        <item name="backgroundTint">@color/background</item>
+        <item name="hintTextColor">@color/onBackground</item>
+        <item name="android:textColorHint">@color/textLink</item>
+
+    </style>
+
+
+    <style name="Widget.ToolBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/btnBg</item>
+        <item name="colorPrimaryDark">@color/red</item>
+        <item name="colorAccent">@color/primary</item>
+        <item name="titleTextColor">@color/textFg</item>
+        <item name="android:background">@color/background</item>
+        <item name="android:iconTintMode">@color/background</item>
+    </style>
+
+    <style name="CalcButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_columnWeight">1</item>
+        <item name="android:layout_rowWeight">1</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:backgroundTint">@color/textFg</item>
+        <item name="android:textColor">@color/input_background</item>
+        <item name="android:layout_margin">4dp</item>
+    </style>
+
+</resources>

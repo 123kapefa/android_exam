@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_items"
+        android:title="@string/title_items"
+        />
+    <!--    android:icon="@drawable/ic_items"-->
+    <item
+        android:id="@+id/nav_characters"
+        android:title="@string/title_characters"
+        />
+    <!--    android:icon="@drawable/ic_characters"-->
+    <item
+        android:id="@+id/achievementListFragment"
+        android:title="@string/title_achievements"
+        />
+    <!--    android:icon="@drawable/ic_characters"-->
+    <item
+        android:id="@+id/playerProfileFragment"
+        android:title="@string/title_profile"
+        />
+    <!--    android:icon="@drawable/ic_characters"-->
+
+</menu>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_500">#43A047</color>
+    <color name="red_400">#E53935</color>
+
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="red">#900</color>
+
+    <color name="primary">#6200EE</color>
+    <color name="primaryVariant">#3700B3</color>
+    <color name="onPrimary">#FFFFFF</color>
+    <color name="background">#FFFFFF</color>
+    <color name="onBackground">#000113</color>
+
+    <color name="textFg">#1E293B</color>
+    <color name="btnBg">#000113</color>
+    <color name="input_background">#000113</color>
+    <color name="textLink">#3A4150</color>
+    <color name="textLinkBold">#2C333A</color>
+    <color name="darkGreen">#002309</color>
+
+    <color name="purple_500">#6750A4</color>
+    <color name="purple_700">#4F378B</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+</resources>

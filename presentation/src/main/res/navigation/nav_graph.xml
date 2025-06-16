@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.test_app.presentation.fragment.LoginFragment"
+        android:label="@string/title_login">
+
+        <action
+            android:id="@+id/action_login_to_list"
+            app:destination="@id/achievementListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/achievementListFragment"
+        android:name="com.example.test_app.presentation.fragment.AchievementListFragment"
+        android:label="@string/title_achievement">
+
+        <action
+            android:id="@+id/action_list_to_detail"
+            app:destination="@id/achievementDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/achievementDetailFragment"
+        android:name="com.example.test_app.presentation.fragment.AchievementDetailFragment"
+        android:label="Achievement detail">
+
+        <argument
+            android:name="achievementId"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/playerProfileFragment"
+        android:name="com.example.test_app.presentation.fragment.PlayerProfileFragment"
+        android:label="@string/title_profile" />
+
+</navigation>
